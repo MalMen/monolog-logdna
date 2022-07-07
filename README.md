@@ -105,3 +105,17 @@ $formatter->addMap(new RedactArgumentsMap([
     'password',
 ]));
 ```
+
+Use monolog-logdna as Laravel log driver
+On config/logging.php add a new channel:
+```
+        'logdna' => [
+            'driver'  => 'monolog',
+            'handler' => Fusions\Monolog\LogDna\Handler\LogDnaHandler::class,
+            'formatter' => Fusions\Monolog\LogDna\Formatter\SmartJsonFormatter::class,
+            'with' => [
+                'ingestionKey' => env('LDA_KEY'),
+                'hostName' => 'laravel'
+            ],
+        ],
+```
